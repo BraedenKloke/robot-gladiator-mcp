@@ -1,10 +1,8 @@
 <p align="center">
-<img src="https://commons.wikimedia.org/wiki/File:Toyota_Robot_at_Toyota_Kaikan.jpg" height="150">
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Toyota_Robot_at_Toyota_Kaikan.jpg" height="150">
 </p>
 <h1 align="center">
 Robot Gladiator Mini-Course Program
-
-![App Deployed](https://github.com/JackieSL1/mini-survey-monkey/actions/workflows/main_mini-survey-monkey.yml/badge.svg)
   
 </h1>
 
