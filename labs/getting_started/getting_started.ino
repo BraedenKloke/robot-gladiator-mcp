@@ -1,14 +1,17 @@
+/**
+Getting started lab.
 
-bool flag = false;
+Spins the right wheel when the robot's sensor detects an object.
+*/
 
-#define B1A 12
-#define B1B 11
-#define A1A 8
-#define A1B 7
-#define PROXI 5
+#define B1A 12 // Right wheel forward
+#define B1B 11 // Right wheel reverse
+#define A1A 8 // Left wheel forward
+#define A1B 7 // Left wheel reverse
+#define PROXI 5 // Sensor
 
 void setup() {
-  // put your setup code here, to run once:
+  // Put your setup code here, to run once:
 
   // pinMode(13, OUTPUT);
   pinMode(B1A, OUTPUT);
@@ -20,19 +23,16 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  // Main loop where code runs repeatedly:
 
+  // Spin right wheel
+  digitalWrite(A1A, true);
+  
+  // Read sensor
   if(digitalRead(PROXI)){
-    digitalWrite(B1A, true);
-    digitalWrite(B1B, false);
-    digitalWrite(A1A, true);
-    digitalWrite(A1B, false);
-  } else {
-    digitalWrite(B1A, false);
-    digitalWrite(B1B, true);
-    digitalWrite(A1A, true);
-    digitalWrite(A1B, false);
-  }
-  delay(500);
+    digitalWrite(A1A, false);
+  } 
 
+  // Wait a little bit ... robots need rest and relaxation too!
+  delay(500); 
 }
