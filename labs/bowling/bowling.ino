@@ -1,7 +1,5 @@
 /**
-Getting started lab.
-
-Spins the right wheel when the robot's sensor detects an object.
+Bowling lab.
 */
 
 #define RIGHT_WHEEL_FORWARD 12 
