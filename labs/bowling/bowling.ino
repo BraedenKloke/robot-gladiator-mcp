@@ -8,6 +8,8 @@ Bowling lab.
 #define LEFT_WHEEL_REVERSE 7
 #define PROXIMITY_SENSOR 5 
 
+bool objectDetected;
+
 void setup() {
   // Put your setup code here, to run once:
 
@@ -18,19 +20,21 @@ void setup() {
   pinMode(LEFT_WHEEL_REVERSE, OUTPUT);
   pinMode(PROXIMITY_SENSOR, INPUT);
 
+  objectDetected = false;
+
 }
 
 void loop() {
   // Main loop where code runs repeatedly:
-
-  // Spin right wheel
-  digitalWrite(LEFT_WHEEL_FORWARD, true);
   
-  // Read sensor
-  if(digitalRead(PROXIMITY_SENSOR)){
+  objectDetected = digitalRead(PROXIMITY_SENSOR) == false;
+  if(objectDetected){
+    // Turn right
     digitalWrite(LEFT_WHEEL_FORWARD, false);
+    delay(500); 
   } 
 
-  // Wait a little bit ... robots need rest and relaxation too!
-  delay(500); 
+  // Move forward
+  digitalWrite(LEFT_WHEEL_FORWARD, true);
+  digitalWrite(RIGHT_WHEEL_FORWARD, true);
 }
