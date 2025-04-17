@@ -2,62 +2,65 @@
  * Objective
  * ---------
  * Write an algorithm for your robot to navigate a race course.
- *
- * Coding convention: https://www.cs.swarthmore.edu/~newhall/unixhelp/c_codestyle.html
  */
 
 // Pins
 #define RIGHT_WHEEL_FORWARD 12 
-#define RIGHT_WHEEL_REVERSE 11
 #define LEFT_WHEEL_FORWARD 8 
-#define LEFT_WHEEL_REVERSE 7
 
-// Time constants
+// Robot speeds
 //
-// These values are derived experimentally
-#define TIME_FOR_30_DEGREE_TURN 500 // milliseconds
-#define TIME_FOR_45_DEGREE_TURN 500 // milliseconds
-#define TIME_FOR_90_DEGREE_TURN 500 // milliseconds
+// These values are derived experimentally in the Measurements lab
+#define LINEAR_SPEED 5 // metres / millisecond
+#define ANGULAR_SPEED 5 // degrees / millisecond
 
-/* 
- * Function: setup
- * ---------------
- * Configures pins to behave as input or output.
- */
 void setup() {
   pinMode(RIGHT_WHEEL_FORWARD, OUTPUT);
-  pinMode(RIGHT_WHEEL_REVERSE, OUTPUT);
   pinMode(LEFT_WHEEL_FORWARD, OUTPUT);
-  pinMode(LEFT_WHEEL_REVERSE, OUTPUT);
 }
 
 void loop() {
-  
-  digitalWrite(LEFT_WHEEL_FORWARD, false);
-  delay(TIME_FOR_45_DEGREE_TURN); 
-
-  // Move forward
-  digitalWrite(LEFT_WHEEL_FORWARD, true);
-  digitalWrite(RIGHT_WHEEL_FORWARD, true);
+  moveForward(1);
+  turnRight(90);
 }
 
 /* 
- * Function: move_forward
+ * Function: moveForward
  * ----------------------
- * Moves the robot forward x centimetres then stops the robot.
+ * Move forward x metres. 
  *
- * x: number of centimetres to travel
+ * x: number of metres to move forward
  */
- void move_forward(x) {
+void moveForward(double x) {
+  double t = x / LINEAR_SPEED; // milliseconds
+
+  // Move forward for t milliseconds
   digitalWrite(LEFT_WHEEL_FORWARD, true);
   digitalWrite(RIGHT_WHEEL_FORWARD, true);
-  delay()
+  delay(t);
 
+  // Stop
   digitalWrite(LEFT_WHEEL_FORWARD, false);
   digitalWrite(RIGHT_WHEEL_FORWARD, false);
- }
+}
 
+/* 
+ * Function: turnRight
+ * -------------------
+ * Turn right x degrees.
+ *
+ * x: number of degrees to turn
+ */
+void turnRight(int x) {
+  double t = x / ANGULAR_SPEED; // milliseconds
 
+  // Turn right for t milliseconds
+  digitalWrite(LEFT_WHEEL_FORWARD, true);
+  delay(t);
+
+  // Stop
+  digitalWrite(LEFT_WHEEL_FORWARD, false);
+}
 
 
 
