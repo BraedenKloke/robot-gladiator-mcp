@@ -50,4 +50,12 @@ void stop() {
   digitalWrite(A1B, false);
 }
 
+bool isObstacleDetected() {
+  if (digitalRead(PROXI) == 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 #endif
