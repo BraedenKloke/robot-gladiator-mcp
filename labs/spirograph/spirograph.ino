@@ -5,5 +5,9 @@ void setup() {
 }
 
 void loop() {
-  
+  if(isObstacleDetected()){
+    stop();
+  }else{
+    forward();
+  }
 }
