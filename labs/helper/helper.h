@@ -1,7 +1,9 @@
 #ifndef __HELPER_H_
 #define __HELPER_H_
 
+// Derived experimentally in lab Measurements
 #define LINEAR_SPEED 1 // metres / second
+#define ANGULAR_SPEED 1 // degrees / second
 
 #define B1A 12 // Right wheel forward
 #define B1B 11 // Right wheel reverse
@@ -62,6 +64,18 @@ void right() {
   digitalWrite(B1B, false);
   digitalWrite(A1A, false);
   digitalWrite(A1B, true);
+}
+
+// Turns robot right x degrees.
+void right(float x) {
+  float t;
+
+  t = x / ANGULAR_SPEED; // degrees / ( degrees / second ) = seconds
+  t = t * 1000; // convert to milliseconds
+
+  right();
+  delay(t);
+  stop();
 }
 
 void left() {
