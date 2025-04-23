@@ -11,12 +11,6 @@
 #define A1B 7 // Left wheel reverse
 #define PROXI 5 // Sensor
 
-
-/*
- * Function: initializePins
- * ========================
- * Initialize input and output pins.
- */
 void initializePins() {
   pinMode(B1A, OUTPUT);
   pinMode(B1B, OUTPUT);
