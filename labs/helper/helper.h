@@ -85,6 +85,18 @@ void left() {
   digitalWrite(A1B, false);
 }
 
+// Turns robot left x degrees.
+void left(float x) {
+  float t;
+
+  t = x / ANGULAR_SPEED; // degrees / ( degrees / second ) = seconds
+  t = t * 1000; // convert to milliseconds
+
+  left();
+  delay(t);
+  stop();
+}
+
 void reverse() {
   digitalWrite(B1A, false);
   digitalWrite(B1B, true);
