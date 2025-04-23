@@ -4,9 +4,7 @@
  * Write an algorithm for your robot to navigate a race course.
  */
 
-// Pins
-#define RIGHT_WHEEL_FORWARD 12 
-#define LEFT_WHEEL_FORWARD 8 
+#include "helper.h"
 
 // Robot speeds
 //
@@ -15,8 +13,7 @@
 #define ANGULAR_SPEED 5 // degrees / millisecond
 
 void setup() {
-  pinMode(RIGHT_WHEEL_FORWARD, OUTPUT);
-  pinMode(LEFT_WHEEL_FORWARD, OUTPUT);
+  initializePins();
 }
 
 void loop() {
@@ -35,13 +32,13 @@ void moveForward(double x) {
   double t = x / LINEAR_SPEED; // milliseconds
 
   // Move forward for t milliseconds
-  digitalWrite(LEFT_WHEEL_FORWARD, true);
-  digitalWrite(RIGHT_WHEEL_FORWARD, true);
+  //digitalWrite(LEFT_WHEEL_FORWARD, true);
+  //digitalWrite(RIGHT_WHEEL_FORWARD, true);
   delay(t);
 
   // Stop
-  digitalWrite(LEFT_WHEEL_FORWARD, false);
-  digitalWrite(RIGHT_WHEEL_FORWARD, false);
+  //digitalWrite(LEFT_WHEEL_FORWARD, false);
+  //digitalWrite(RIGHT_WHEEL_FORWARD, false);
 }
 
 /* 
@@ -55,11 +52,11 @@ void turnRight(int x) {
   double t = x / ANGULAR_SPEED; // milliseconds
 
   // Turn right for t milliseconds
-  digitalWrite(LEFT_WHEEL_FORWARD, true);
+  //digitalWrite(LEFT_WHEEL_FORWARD, true);
   delay(t);
 
   // Stop
-  digitalWrite(LEFT_WHEEL_FORWARD, false);
+  //digitalWrite(LEFT_WHEEL_FORWARD, false);
 }
 
 
