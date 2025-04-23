@@ -7,12 +7,26 @@
 #define A1B 7 // Left wheel reverse
 #define PROXI 5 // Sensor
 
-void initialize_pins() {
+
+/*
+ * Function: initializePins
+ * ========================
+ * Initialize input and output pins.
+ */
+void initializePins() {
   pinMode(B1A, OUTPUT);
   pinMode(B1B, OUTPUT);
   pinMode(A1A, OUTPUT);
   pinMode(A1B, OUTPUT);
   pinMode(PROXI, INPUT);
+}
+
+// Deprecated
+//
+// Braeden: Incorrect naming convention. Functions should be camelCase 
+// to match convention of Arduino built-in functions (e.g., digitalRead).
+void initialize_pins() {
+  initializePins();
 }
 
 void forward() {
