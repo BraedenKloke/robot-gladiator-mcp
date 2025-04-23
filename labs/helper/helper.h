@@ -1,6 +1,8 @@
 #ifndef __HELPER_H_
 #define __HELPER_H_
 
+#define LINEAR_SPEED 1 // metres / second
+
 #define B1A 12 // Right wheel forward
 #define B1B 11 // Right wheel reverse
 #define A1A 8 // Left wheel forward
@@ -29,11 +31,30 @@ void initialize_pins() {
   initializePins();
 }
 
+void stop() {
+  digitalWrite(B1A, false);
+  digitalWrite(B1B, false);
+  digitalWrite(A1A, false);
+  digitalWrite(A1B, false);
+}
+
 void forward() {
   digitalWrite(B1A, true);
   digitalWrite(B1B, false);
   digitalWrite(A1A, true);
   digitalWrite(A1B, false);
+}
+
+// Moves robot forward x metres.
+void forward(float x) {
+  float t;
+
+  t = x / LINEAR_SPEED; // metres / ( metres / second ) = seconds
+  t = t * 1000; // convert to milliseconds
+
+  forward();
+  delay(t);
+  stop();
 }
 
 void right() {
@@ -55,13 +76,6 @@ void reverse() {
   digitalWrite(B1B, true);
   digitalWrite(A1A, false);
   digitalWrite(A1B, true);
-}
-
-void stop() {
-  digitalWrite(B1A, false);
-  digitalWrite(B1B, false);
-  digitalWrite(A1A, false);
-  digitalWrite(A1B, false);
 }
 
 #endif

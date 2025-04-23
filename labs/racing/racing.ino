@@ -6,15 +6,10 @@
 
 #include "helper.h"
 
-// Robot speeds
-//
-// These values are derived experimentally in the Measurements lab
-#define LINEAR_SPEED 5 // metres / millisecond
-#define ANGULAR_SPEED 5 // degrees / millisecond
-
 void setup() {
   initializePins();
 }
 
 void loop() {
+  forward();
 }
