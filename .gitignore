@@ -1,0 +1,6 @@
+# ignore helper header files unless they are located in helper folder
+helper.h
+!/labs/helper/helper.h
+
+# Vim
+*.swp
