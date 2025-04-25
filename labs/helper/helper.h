@@ -5,8 +5,7 @@
 extern float LINEAR_SPEED; // metres / second
 extern float ANGULAR_SPEED; // degrees / second
 
-// Extern definitions
-// Nico : Students can initialize these variables on in the SETUP function.
+// Nico: Students can initialize these variables in setup function
 float LINEAR_SPEED, ANGULAR_SPEED;
 
 #define B1A 12 // Right wheel forward
