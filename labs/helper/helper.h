@@ -139,15 +139,21 @@ bool isObstacleDetected() {
 
 // Returns number of centimetres robot is distanced from an object.
 float measureDistance() {
+  // Ultrasonic Ranging Module HC - SRO4 Datasheet:
+  // https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf
+  const int MIN_TIME_BETWEEN_MEASUREMENTS = 60; // ms
+  const int MIN_TRIGGER_SIGNAL_DURATION = 10; // us
+  const int PULSE_WIDTH_TO_CM_CONVERSION_CONST = 58;
+
   unsigned long t1;
   unsigned long t2;
   unsigned long pulse_width;
   float cm;
   float inches;
 
-  // Hold the trigger pin high for at least 10 us
+  // Hold the trigger pin high 
   digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(10);
+  delayMicroseconds(MIN_TRIGGER_SIGNAL_DURATION);
   digitalWrite(TRIG_PIN, LOW);
 
   // Wait for pulse on echo pin
@@ -160,11 +166,8 @@ float measureDistance() {
   t2 = micros();
   pulse_width = t2 - t1;
 
-  // Calculate distance in centimetres and inches. 
-  // 
-  // The constants are found in the datasheet, 
-  // and calculated from the assumed speed of sound in air at sea level (~340 m/s).
-  cm = pulse_width / 58.0;
+  // Calculate distance in centimetres 
+  cm = pulse_width / PULSE_WIDTH_TO_CM_CONVERSION_CONST;
 
   // Print out results
   if ( pulse_width > MAX_DIST ) {
@@ -174,9 +177,7 @@ float measureDistance() {
     Serial.println(" cm");
   }
 
-  // Wait at least 60 ms before next measurement 
-  // in order to prevent trigger signal to the echo signal
-  delay(60);
+  delay(MIN_TIME_BETWEEN_MEASUREMENTS);
 
   return cm;
 }
