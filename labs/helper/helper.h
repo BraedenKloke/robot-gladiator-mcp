@@ -127,6 +127,7 @@ void reverse(float x) {
   stop();
 }
 
+// Returns true if object detected by the infrared sensor, false otherwise.
 bool isObstacleDetected() {
   int sensorIn = digitalRead(PROXI);
   if (sensorIn == 1) {
