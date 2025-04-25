@@ -5,9 +5,6 @@
 extern float LINEAR_SPEED; // metres / second
 extern float ANGULAR_SPEED; // degrees / second
 
-// Nico: Students can initialize these variables in setup function
-float LINEAR_SPEED, ANGULAR_SPEED;
-
 #define B1A 12 // Right wheel forward
 #define B1B 11 // Right wheel reverse
 #define A1A 8 // Left wheel forward

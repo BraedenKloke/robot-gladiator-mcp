@@ -1,5 +1,7 @@
 #include "helper.h"
 
+float LINEAR_SPEED, ANGULAR_SPEED;
+
 void setup() {
   Serial.begin(9600);
 
