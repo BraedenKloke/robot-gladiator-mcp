@@ -16,8 +16,6 @@ extern float ANGULAR_SPEED; // degrees / second
 #define TRIG_PIN 7
 #define ECHO_PIN 8 
 
-// Anything over 400 cm (23200 us pulse) is "out of range"
-const unsigned int MAX_DIST = 23200;
 
 void initializePins() {
 
@@ -141,6 +139,7 @@ bool isObstacleDetected() {
 float measureDistance() {
   // Ultrasonic Ranging Module HC - SRO4 Datasheet:
   // https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf
+  const int MAX_DISTANCE = 23200; // 400 cm, Braeden: How is this calculated?
   const int MIN_TIME_BETWEEN_MEASUREMENTS = 60; // ms
   const int MIN_TRIGGER_SIGNAL_DURATION = 10; // us
   const int PULSE_WIDTH_TO_CM_CONVERSION_CONST = 58;
@@ -170,7 +169,7 @@ float measureDistance() {
   cm = pulse_width / PULSE_WIDTH_TO_CM_CONVERSION_CONST;
 
   // Print out results
-  if ( pulse_width > MAX_DIST ) {
+  if ( pulse_width > MAX_DISTANCE ) {
     Serial.println("Out of range");
   } else {
     Serial.print(cm);
