@@ -137,24 +137,8 @@ bool isObstacleDetected() {
   }
 }
 
-void measureDistance() {
-  // digitalWrite(ULTRASONIC_TRIG, LOW);
-  // delayMicroseconds(2);
-  // digitalWrite(ULTRASONIC_TRIG, HIGH);
-  // delayMicroseconds(10);
-  // digitalWrite(ULTRASONIC_TRIG, LOW);
-
-  // float duration = pulseIn(ULTRASONIC_ECHO, HIGH);
-  
-  // float speedOfSound = 0.0343; // c/mS
-  // float distance = (duration * speedOfSound) / 2;
-
-  // Serial.print("Dur");
-  // Serial.print(duration);
-  // Serial.print("Distance: ");
-  // Serial.print(distance);
-  // Serial.println();
-
+// Returns number of centimetres robot is distanced from an object.
+float measureDistance() {
   unsigned long t1;
   unsigned long t2;
   unsigned long pulse_width;
@@ -169,31 +153,32 @@ void measureDistance() {
   // Wait for pulse on echo pin
   while ( digitalRead(ECHO_PIN) == 0 );
 
-  // Measure how long the echo pin was held high (pulse width)
-  // Note: the micros() counter will overflow after ~70 min
+  // Measure how long the echo pin was held high (pulse width),
+  // the micros() counter will overflow after ~70 min
   t1 = micros();
-  while ( digitalRead(ECHO_PIN) == 1);
+  while ( digitalRead(ECHO_PIN) == 1 );
   t2 = micros();
   pulse_width = t2 - t1;
 
-  // Calculate distance in centimeters and inches. The constants
-  // are found in the datasheet, and calculated from the assumed speed
-  //of sound in air at sea level (~340 m/s).
+  // Calculate distance in centimetres and inches. 
+  // 
+  // The constants are found in the datasheet, 
+  // and calculated from the assumed speed of sound in air at sea level (~340 m/s).
   cm = pulse_width / 58.0;
-  inches = pulse_width / 148.0;
 
   // Print out results
   if ( pulse_width > MAX_DIST ) {
     Serial.println("Out of range");
   } else {
     Serial.print(cm);
-    Serial.print(" cm \t");
-    Serial.print(inches);
-    Serial.println(" in");
+    Serial.println(" cm");
   }
 
-  // Wait at least 60ms before next measurement
+  // Wait at least 60 ms before next measurement 
+  // in order to prevent trigger signal to the echo signal
   delay(60);
+
+  return cm;
 }
 
 #endif
