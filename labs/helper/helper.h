@@ -14,12 +14,8 @@ float LINEAR_SPEED, ANGULAR_SPEED;
 #define A1B 7 // Left wheel reverse
 
 #define PROXI 5 // Infrared sensor
-// #define ULTRASONIC_TRIG 9
-// #define ULTRASONIC_ECHO 10
-
-// Pins
-const int TRIG_PIN = 7;
-const int ECHO_PIN = 8;
+#define TRIG_PIN 7
+#define ECHO_PIN 8
 
 // Anything over 400 cm (23200 us pulse) is "out of range"
 const unsigned int MAX_DIST = 23200;
