@@ -14,27 +14,29 @@ float LINEAR_SPEED, ANGULAR_SPEED;
 #define A1B 7 // Left wheel reverse
 
 #define PROXI 5 // Infrared sensor
+
+// Ultrasonic sensor 
 #define TRIG_PIN 7
-#define ECHO_PIN 8
+#define ECHO_PIN 8 
 
 // Anything over 400 cm (23200 us pulse) is "out of range"
 const unsigned int MAX_DIST = 23200;
 
 void initializePins() {
+
+  // Wheels
   pinMode(B1A, OUTPUT);
   pinMode(B1B, OUTPUT);
   pinMode(A1A, OUTPUT);
   pinMode(A1B, OUTPUT);
-  pinMode(PROXI, INPUT);
-  // pinMode(ULTRASONIC_TRIG, OUTPUT);
-  // pinMode(ULTRASONIC_ECHO, INPUT);
-  // The Trigger pin will tell the sensor to range find
-  pinMode(TRIG_PIN, OUTPUT);
-  digitalWrite(TRIG_PIN, LOW);
 
-  //Set Echo pin as input to measure the duration of 
-  //pulses coming back from the distance sensor
-  pinMode(ECHO_PIN, INPUT);
+  // Infrared sensor
+  pinMode(PROXI, INPUT);
+
+  // Ultrasonic sensor
+  pinMode(TRIG_PIN, OUTPUT); // Commands the ultrasonic sensor to emit a ultrasonic wave
+  digitalWrite(TRIG_PIN, LOW);
+  pinMode(ECHO_PIN, INPUT); // Measures the returning ultrasonic wave
 }
 
 // Deprecated
