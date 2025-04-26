@@ -13,8 +13,8 @@ extern float ANGULAR_SPEED; // degrees / second
 #define PROXI 5 // Infrared sensor
 
 // Ultrasonic sensor 
-#define TRIG_PIN 7
-#define ECHO_PIN 8 
+#define TRIG_PIN 3
+#define ECHO_PIN 4 
 
 
 void initializePins() {
