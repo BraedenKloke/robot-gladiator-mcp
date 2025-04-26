@@ -13,8 +13,8 @@ extern float ANGULAR_SPEED; // degrees / second
 #define PROXI 5 // Infrared sensor
 
 // Ultrasonic sensor 
-#define TRIG_PIN 4
-#define ECHO_PIN 3 
+#define TRIG_PIN 2
+#define ECHO_PIN 9
 
 
 void initializePins() {
@@ -139,41 +139,36 @@ bool isObstacleDetected() {
 float measureDistance() {
   // Ultrasonic Ranging Module HC - SRO4 Datasheet:
   // https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf
-  const int MAX_DISTANCE = 23200; // 400 cm, Braeden: How is this calculated?
+
+  const int MAX_DISTANCE = 100; // 100 cm, Braeden: How is this calculated? Sasi: Arbitrary
   const int MIN_TIME_BETWEEN_MEASUREMENTS = 60; // ms
   const int MIN_TRIGGER_SIGNAL_DURATION = 10; // us
-  const int PULSE_WIDTH_TO_CM_CONVERSION_CONST = 58;
+  // distance = pulse_width(2*us) * m/s * s/ms * ms/us * cm/m * 1/2
+  const float PULSE_WIDTH_TO_CM_CONVERSION_CONST = 343 * 0.001 * 0.001 * 100 * 0.5;
 
   unsigned long t1;
   unsigned long t2;
   unsigned long pulse_width;
   float cm;
-  float inches;
+
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
 
   // Hold the trigger pin high 
   digitalWrite(TRIG_PIN, HIGH);
   delayMicroseconds(MIN_TRIGGER_SIGNAL_DURATION);
   digitalWrite(TRIG_PIN, LOW);
 
-  // Wait for pulse on echo pin
-  while ( digitalRead(ECHO_PIN) == 0 );
-
-  // Measure how long the echo pin was held high (pulse width),
-  // the micros() counter will overflow after ~70 min
-  Serial.println("Not Low");
-  t1 = micros();
-  while ( digitalRead(ECHO_PIN) == 1 );
-  t2 = micros();
-  pulse_width = t2 - t1;
-  Serial.println("Done");
-  // pulse_width = pulseIn(ECHO_PIN, HIGH);
+  //The duration of the input pulse when ECHO_PIN is high
+  pulse_width = pulseIn(ECHO_PIN, HIGH);
 
   // Calculate distance in centimetres 
-  cm = pulse_width / PULSE_WIDTH_TO_CM_CONVERSION_CONST;
+  cm = pulse_width * PULSE_WIDTH_TO_CM_CONVERSION_CONST;
 
   // Print out results
-  if ( pulse_width > MAX_DISTANCE ) {
+  if ( cm > MAX_DISTANCE ) {
     Serial.println("Out of range");
+    return -1;
   } else {
     Serial.print(cm);
     Serial.println(" cm");

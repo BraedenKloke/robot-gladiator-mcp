@@ -5,6 +5,8 @@ float LINEAR_SPEED, ANGULAR_SPEED;
 void setup() {
   Serial.begin(9600);
 
+  initializePins();
+
   LINEAR_SPEED = 1;
   ANGULAR_SPEED = 1;
 }
@@ -18,4 +20,5 @@ void loop() {
   }
 
   measureDistance();
+  
 }
