@@ -13,8 +13,8 @@ extern float ANGULAR_SPEED; // degrees / second
 #define PROXI 5 // Infrared sensor
 
 // Ultrasonic sensor 
-#define TRIG_PIN 7
-#define ECHO_PIN 8 
+#define TRIG_PIN 4
+#define ECHO_PIN 3 
 
 
 void initializePins() {
@@ -31,7 +31,7 @@ void initializePins() {
   // Ultrasonic sensor
   pinMode(TRIG_PIN, OUTPUT); // Commands the ultrasonic sensor to emit a ultrasonic wave
   digitalWrite(TRIG_PIN, LOW);
-  pinMode(ECHO_PIN, INPUT); // Measures the returning ultrasonic wave
+  pinMode(ECHO_PIN, INPUT_PULLUP); // Measures the returning ultrasonic wave
 }
 
 // Deprecated
@@ -160,10 +160,13 @@ float measureDistance() {
 
   // Measure how long the echo pin was held high (pulse width),
   // the micros() counter will overflow after ~70 min
+  Serial.println("Not Low");
   t1 = micros();
   while ( digitalRead(ECHO_PIN) == 1 );
   t2 = micros();
   pulse_width = t2 - t1;
+  Serial.println("Done");
+  // pulse_width = pulseIn(ECHO_PIN, HIGH);
 
   // Calculate distance in centimetres 
   cm = pulse_width / PULSE_WIDTH_TO_CM_CONVERSION_CONST;
