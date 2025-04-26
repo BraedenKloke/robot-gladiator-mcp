@@ -1,17 +1,16 @@
-/*
- * Moves robot forward in a straight line.
- */
+#include "helper.h"
 
-// Pins
-#define RIGHT_WHEEL_FORWARD 12 
-#define LEFT_WHEEL_FORWARD 8 
+float LINEAR_SPEED = 1.0; // m / s
+float ANGULAR_SPEED = 1.0; // m / s
 
 void setup() {
-  pinMode(RIGHT_WHEEL_FORWARD, OUTPUT);
-  pinMode(LEFT_WHEEL_FORWARD, OUTPUT);
+  initializePins();
 }
 
 void loop() {
-  digitalWrite(RIGHT_WHEEL_FORWARD, true);
-  digitalWrite(LEFT_WHEEL_FORWARD, true);
+  forward();
+  delay(1000);
+  
+  stop();
+  while(true);
 }
