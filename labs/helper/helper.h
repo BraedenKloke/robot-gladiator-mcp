@@ -34,14 +34,6 @@ void initializePins() {
   pinMode(ECHO_PIN, INPUT_PULLUP); // Measures the returning ultrasonic wave
 }
 
-// Deprecated
-//
-// Braeden: Incorrect naming convention. Functions should be camelCase 
-// to match convention of Arduino built-in functions (e.g., digitalRead).
-void initialize_pins() {
-  initializePins();
-}
-
 void stop() {
   digitalWrite(B1A, false);
   digitalWrite(B1B, false);
